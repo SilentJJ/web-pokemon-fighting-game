@@ -49,7 +49,8 @@ function App() {
         const locations = data.results.map(location => location.name.toUpperCase())
         setLocationData(locations)
       })
-    ourPokemons.map(pokemon => getPokemonDatas(pokemon))
+    Promise.all([getPokemonDatas(ourPokemons[0]), getPokemonDatas(ourPokemons[1]), getPokemonDatas(ourPokemons[2])])
+    .then(data => setOurPokemons(data))
   }, [])
 
   useEffect(() => {
@@ -85,6 +86,8 @@ function App() {
       <div className='choose-page'>
         <Choose
           ourPokemons={ourPokemons}
+          enemyPokemonData={enemyPokemonData}
+          setSelectedPokemon={setSelectedPokemon}
         />
       </div>
     )
