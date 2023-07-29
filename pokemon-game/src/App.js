@@ -33,6 +33,13 @@ function App() {
       setLocationData(locations)
     })
   }, [])
+
+  useEffect(() => {
+    if (selectedLocation.length > 0) {
+      fetchURL(selectedLocation)
+      .then(data => setAreaData([data]))
+    }
+    }, [selectedLocation])
   
   if (pageNum === 1) {
     return (
