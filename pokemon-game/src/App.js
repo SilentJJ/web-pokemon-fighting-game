@@ -7,17 +7,33 @@ import Battle from './components/Battle';
 
 const locationsURL = 'https://pokeapi.co/api/v2/location/'
 
+const fetchURL = (url) => {
+  const data = fetch(url).then(data => data.json())
+  return data
+}
+
 function App() {
 
   const [pageNum, setPageNum] = useState(1)
+  const [locations, setLocations] = useState('')
   const [ourPokemons, setOurPokemons] = useState([
-  "https://pokeapi.co/api/v2/pokemon/pikachu",
-  "https://pokeapi.co/api/v2/pokemon/snorlax",
-  "https://pokeapi.co/api/v2/pokemon/eternatus"])
+  'https://pokeapi.co/api/v2/pokemon/pikachu',
+  'https://pokeapi.co/api/v2/pokemon/snorlax',
+  'https://pokeapi.co/api/v2/pokemon/eternatus'])
+
+  useEffect(() => {
+    const fetchAndSetLocatio = () => {
+      const data = fetchURL(locationsURL)
+      const locations = data.result.map(location => location.name.toUpperCase())
+      setLocations(locations)
+    }
+    fetchAndSetLocatio()
+  }, [])
   
   if (pageNum === 1) {
     return (
       <Location 
+      locations={locations}
       />
     )
   } else if (pageNum === 2) {
