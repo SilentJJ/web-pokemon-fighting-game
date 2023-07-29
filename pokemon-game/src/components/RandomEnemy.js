@@ -10,7 +10,6 @@ function RandomEnemy(fetchURL, setEnemyPokemonData, selectedArea, getPokemonData
       const randomIndex = Math.floor(Math.random() * enemyURLs.length)
       return getPokemonDatas(enemyURLs[randomIndex])
     })
-    .then(enemy => { console.log(enemy) })
     .then(enemy => setEnemyPokemonData(enemy))
 }
 

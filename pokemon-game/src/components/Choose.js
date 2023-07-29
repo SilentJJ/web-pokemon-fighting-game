@@ -1,8 +1,9 @@
 function Choose() {
-  return (
+  return (<>
     <div className="Choose">
-      Choose Page
+      <h2 id="choose-headline">Choose a pokemon</h2>
     </div>
+  </>
   );
 }
 

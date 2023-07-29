@@ -21,7 +21,8 @@ const getPokemonDatas = (pokemonURL) => {
         attack: data.stats[1].base_stat,
         defense: data.stats[2].base_stat,
         imgFront: data.sprites.front_default,
-        imgBack: data.sprites.back_default
+        imgBack: data.sprites.back_default,
+        type: data.types.length === 1 ? [data.types[0].type.name] : data.types.map(type => type.type.name)
       }
       return pokemonData
     })
