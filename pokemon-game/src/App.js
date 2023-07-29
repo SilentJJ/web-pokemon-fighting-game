@@ -14,17 +14,17 @@ const fetchURL = (url) => {
 
 const getPokemonDatas = (pokemonURL) => {
   const pokeData = fetchURL(pokemonURL)
-  .then(data => {
-    const pokemonData = {
-      name: data.name,
-      hp: data.stats[0].base_stat,
-      attack: data.stats[1].base_stat,
-      defense: data.stats[2].base_stat,
-      imgFront: data.sprites.front_default,
-      imgBack: data.sprites.back_default
-    }
-    return pokemonData
-  })
+    .then(data => {
+      const pokemonData = {
+        name: data.name,
+        hp: data.stats[0].base_stat,
+        attack: data.stats[1].base_stat,
+        defense: data.stats[2].base_stat,
+        imgFront: data.sprites.front_default,
+        imgBack: data.sprites.back_default
+      }
+      return pokemonData
+    })
   return pokeData
 }
 
@@ -36,26 +36,27 @@ function App() {
   const [areaData, setAreaData] = useState([])
   const [selectedArea, setSelectedArea] = useState('')
   const [ourPokemons, setOurPokemons] = useState([
-  'https://pokeapi.co/api/v2/pokemon/magikarp',
-  'https://pokeapi.co/api/v2/pokemon/snorlax',
-  'https://pokeapi.co/api/v2/pokemon/eternatus'])
+    'https://pokeapi.co/api/v2/pokemon/magikarp',
+    'https://pokeapi.co/api/v2/pokemon/snorlax',
+    'https://pokeapi.co/api/v2/pokemon/eternatus'])
   const [selectedPokemon, setSelectedPokemon] = useState([])
   const [enemyPokemonData, setEnemyPokemonData] = useState([])
 
   useEffect(() => {
     fetchURL(locationsURL)
-    .then(data => {
-      const locations = data.results.map(location => location.name.toUpperCase())
-      setLocationData(locations)
-    })
+      .then(data => {
+        const locations = data.results.map(location => location.name.toUpperCase())
+        setLocationData(locations)
+      })
+    ourPokemons.map(pokemon => getPokemonDatas(pokemon))
   }, [])
 
   useEffect(() => {
     if (selectedLocation.length > 0) {
       fetchURL(selectedLocation)
-      .then(data => setAreaData([data]))
+        .then(data => setAreaData([data]))
     }
-    }, [selectedLocation])
+  }, [selectedLocation])
 
   useEffect(() => {
     if (selectedArea.length > 0) {
@@ -64,11 +65,11 @@ function App() {
       setSelectedArea('')
     }
   }, [selectedArea])
-  
+
   if (pageNum === 1) {
     return (
       <div className='location-page'>
-        <Location 
+        <Location
           locationData={locationData}
           selectedLocation={selectedLocation}
           setSelectedLocation={setSelectedLocation}
