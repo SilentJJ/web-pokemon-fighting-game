@@ -1,3 +1,5 @@
+import Area from './Area'
+
 function Location() {
   return (
     <div className="Location">

@@ -15,25 +15,30 @@ const fetchURL = (url) => {
 function App() {
 
   const [pageNum, setPageNum] = useState(1)
-  const [locations, setLocations] = useState('')
+  const [locationData, setLocationData] = useState('')
+  const [selectedLocation, setSelectedLocation] = useState('')
+  const [areaData, setAreaData] = useState([])
+  const [selectedArea, setSelectedArea] = useState('')
   const [ourPokemons, setOurPokemons] = useState([
-  'https://pokeapi.co/api/v2/pokemon/pikachu',
+  'https://pokeapi.co/api/v2/pokemon/magikarp',
   'https://pokeapi.co/api/v2/pokemon/snorlax',
   'https://pokeapi.co/api/v2/pokemon/eternatus'])
+  const [selectedPokemon, setSelectedPokemon] = useState('')
+  const [enemyPokemonData, setEnemyPokemonData] = useState('')
 
   useEffect(() => {
-    const fetchAndSetLocatio = () => {
+    const fetchAndSetLocations = () => {
       const data = fetchURL(locationsURL)
       const locations = data.result.map(location => location.name.toUpperCase())
-      setLocations(locations)
+      setLocationData(locations)
     }
-    fetchAndSetLocatio()
+    fetchAndSetLocations()
   }, [])
   
   if (pageNum === 1) {
     return (
       <Location 
-      locations={locations}
+      locationData={locationData}
       />
     )
   } else if (pageNum === 2) {
