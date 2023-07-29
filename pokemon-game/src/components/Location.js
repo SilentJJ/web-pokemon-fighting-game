@@ -1,7 +1,7 @@
 function Location() {
   return (
     <div className="Location">
-
+      Location Page
     </div>
   );
 }
