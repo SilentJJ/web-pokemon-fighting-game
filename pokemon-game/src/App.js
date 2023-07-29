@@ -15,7 +15,7 @@ const fetchURL = (url) => {
 function App() {
 
   const [pageNum, setPageNum] = useState(1)
-  const [locationData, setLocationData] = useState('')
+  const [locationData, setLocationData] = useState([])
   const [selectedLocation, setSelectedLocation] = useState('')
   const [areaData, setAreaData] = useState([])
   const [selectedArea, setSelectedArea] = useState('')
@@ -27,31 +27,41 @@ function App() {
   const [enemyPokemonData, setEnemyPokemonData] = useState('')
 
   useEffect(() => {
-    const fetchAndSetLocations = () => {
-      const data = fetchURL(locationsURL)
-      const locations = data.result.map(location => location.name.toUpperCase())
+    fetchURL(locationsURL)
+    .then(data => {
+      const locations = data.results.map(location => location.name.toUpperCase())
       setLocationData(locations)
-    }
-    fetchAndSetLocations()
+    })
   }, [])
   
   if (pageNum === 1) {
     return (
-      <Location 
-      locationData={locationData}
-      />
+      <div className='location-page'>
+        <Location 
+          locationData={locationData}
+          selectedLocation={selectedLocation}
+          setSelectedLocation={setSelectedLocation}
+          areaData={areaData}
+          setSelectedArea={setSelectedArea}
+          locationsURL={locationsURL}
+        />
+      </div>
     )
   } else if (pageNum === 2) {
     return (
-      <Choose
-      ourPokemons={ourPokemons}
-      />
+      <div className='choose-page'>
+        <Choose
+          ourPokemons={ourPokemons}
+        />
+      </div>
     )
   } else {
     return (
-      <Battle
-      setOurPokemons={setOurPokemons}
-      />
+      <div className='battle-page'>
+        <Battle
+          setOurPokemons={setOurPokemons}
+        />
+      </div>
     )
   }
 }
