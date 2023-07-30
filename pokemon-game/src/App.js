@@ -68,6 +68,12 @@ function App() {
     }
   }, [selectedArea])
 
+  useEffect(() => {
+    if (selectedPokemon.name) {
+      setPageNum(3)
+    }
+  }, [selectedPokemon])
+
   if (pageNum === 1) {
     return (
       <div className='location-page'>
