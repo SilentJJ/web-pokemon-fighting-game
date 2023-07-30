@@ -8,7 +8,6 @@ function Location({ locationData, selectedLocation, setSelectedLocation, areaDat
 
   return (
     <div className='Location'>
-      {/* <h2 className='location-title'>Choose a location to fight!</h2> */}
       <select onChange={handleLocationSelect}>
         {locationData.map((location, index) => 
           <option key={index} value={index}>
