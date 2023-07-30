@@ -101,7 +101,12 @@ function App() {
     return (
       <div className='battle-page'>
         <Battle
+          selectedPokemon={selectedPokemon}
+          setSelectedPokemon={setSelectedPokemon}
+          enemyPokemonData={enemyPokemonData}
+          ourPokemons={ourPokemons}
           setOurPokemons={setOurPokemons}
+          setPageNum={setPageNum}
         />
       </div>
     )
