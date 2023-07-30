@@ -1,3 +1,4 @@
+import './Choose.css'
 import backgroundMaker from "./pokemon-colors";
 
 function Choose({ ourPokemons, enemyPokemonData, setSelectedPokemon }) {
@@ -18,6 +19,7 @@ function Choose({ ourPokemons, enemyPokemonData, setSelectedPokemon }) {
       )}
     </div>
     <div className="enemy-container" key="enemy">
+      <h2 className="theEnemy">Enemy</h2>
       <div className="enemy-card" key="enemy-card" style={backgroundMaker(enemyPokemonData.type)}>
         <img src={enemyPokemonData.imgFront} alt="There is nothing" key="enemy-img"></img>
         <h2 className="pokemon-name" key="enemy-name">{enemyPokemonData.name}</h2>

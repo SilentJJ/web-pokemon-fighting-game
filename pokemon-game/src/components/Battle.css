@@ -1,0 +1,79 @@
+button#attack {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+#win-p {
+  margin: 5px 0;
+}
+
+img {
+  max-width: 150px;
+  margin-top: 10px;
+}
+
+.battle-container {
+  width: 100vw;
+  height: 100vh;
+  display: grid; 
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr; 
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr; 
+  gap: 0px 0px; 
+  grid-template-areas: 
+    ". . . . . . . . ."
+    ". . . . . . enemy . ."
+    ". . pokemon . . . enemy . ."
+    ". . pokemon . . . . . ."
+    ". . . . . . . . ."; 
+}
+
+.pokemon {
+  grid-area: pokemon;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  align-items: center;
+  transform: scale(1.1);
+}
+
+.enemy {
+  grid-area: enemy;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  align-items: center;
+}
+
+.damageTaken {
+  animation: damage-taken 500ms;
+}
+
+@keyframes damage-taken {
+  0%,
+  20%,
+  40%,
+  60%,
+  80%,
+  100% {
+    transform: translateX(-5px);
+  }
+
+  10%,
+  30%,
+  50%,
+  70%,
+  90% {
+    transform: translateX(5px);
+  }
+}
