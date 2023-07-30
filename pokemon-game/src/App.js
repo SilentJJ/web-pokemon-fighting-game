@@ -84,11 +84,11 @@ function App() {
   } else if (pageNum === 2) {
     return (
       <div className='choose-page'>
-        <Choose
+          <Choose
           ourPokemons={ourPokemons}
           enemyPokemonData={enemyPokemonData}
           setSelectedPokemon={setSelectedPokemon}
-        />
+          />
       </div>
     )
   } else {
