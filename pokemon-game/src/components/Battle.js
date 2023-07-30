@@ -44,16 +44,6 @@ function Battle({ selectedPokemon, setSelectedPokemon, enemyPokemonData, ourPoke
     }
   }
 
-  // const damageTaken = (target) => {
-  //   if (target === "our" && !ourTurn) {
-  //     return "damageTaken"
-  //   } else if (target === "enemy" && ourTurn) {
-  //     return "damageTaken"
-  //   } else {
-  //     return ""
-  //   }
-  // }
-
   if (pokemon.hp > 1 && enemy.hp > 1) {
     return (
       <div className="battle-container">
