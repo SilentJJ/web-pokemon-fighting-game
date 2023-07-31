@@ -41,6 +41,11 @@ function Battle({ selectedPokemon, setSelectedPokemon, enemyPokemonData, ourPoke
     } else if (pokemon.hp < 1 && enemy.hp > 1) {
       setBattlePhase(false)
       setSelectedPokemon([])
+    } else if (pokemon.hp < 1 && enemy.hp < 1) {
+      pokemon.hp = 1;
+      setOurPokemons([...ourPokemons, {...enemyPokemonData}])
+      setBattlePhase(false)
+      setSelectedPokemon([])
     }
   }
 
@@ -67,7 +72,7 @@ function Battle({ selectedPokemon, setSelectedPokemon, enemyPokemonData, ourPoke
         </div>
       </div>
     );
-  } else if (pokemon.hp > 1 && !battlePhase) {
+  } else if (!battlePhase && pokemon.hp > 1 || (pokemon.hp < 1 && enemy.hp < 1)) {
     return (
       <div className='after-battle-container'>
         <video autoPlay loop>
