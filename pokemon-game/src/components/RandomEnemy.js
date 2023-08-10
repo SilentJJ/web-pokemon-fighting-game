@@ -1,4 +1,4 @@
-function RandomEnemy(fetchURL, setEnemyPokemonData, selectedArea, getPokemonDatas) {
+function randomEnemy(fetchURL, setEnemyPokemonData, selectedArea, getPokemonDatas) {
   fetchURL(selectedArea)
     .then(data =>
       data['pokemon_encounters'].map(pokemon => {
@@ -13,4 +13,4 @@ function RandomEnemy(fetchURL, setEnemyPokemonData, selectedArea, getPokemonData
     .then(enemy => setEnemyPokemonData(enemy))
 }
 
-export default RandomEnemy;
+export default randomEnemy;

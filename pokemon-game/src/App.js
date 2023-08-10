@@ -1,7 +1,7 @@
 import './App.css';
 import { useState, useEffect } from 'react'
 import Location from './components/Location'
-import RandomEnemy from './components/RandomEnemy'
+import randomEnemy from './components/randomEnemy'
 import Choose from './components/Choose'
 import Battle from './components/Battle';
 
@@ -43,6 +43,34 @@ function App() {
   const [selectedPokemon, setSelectedPokemon] = useState([])
   const [enemyPokemonData, setEnemyPokemonData] = useState([])
 
+  const onLocationSelected = (event) => {
+    setSelectedLocation(locationsURL + (Number(event.target.value) + 1))
+  }
+
+  const onAreaSelected  = (areaURL) => {
+    setSelectedArea(areaURL)
+  }
+
+  const onPokemonSelected = (pokemon) => {
+    setSelectedPokemon(pokemon)
+  }
+
+  const handleBattleEnding = (ourPokemon, enemy) => {
+    if (ourPokemon.hp > 1 && enemy.hp < 1) {
+      setOurPokemons([...ourPokemons, {...enemyPokemonData}])
+      setSelectedPokemon([])
+    } else if (ourPokemon.hp < 1 && enemy.hp > 1) {
+      setSelectedPokemon([])
+    } else if (ourPokemon.hp < 1 && enemy.hp < 1) {
+      setOurPokemons([...ourPokemons, {...enemyPokemonData}])
+      setSelectedPokemon([])
+    }
+  }
+
+  const handleGoingBackToTheLocations = () => {
+    setPageNum(1)
+  }
+
   useEffect(() => {
     fetchURL(locationsURL)
       .then(data => {
@@ -62,7 +90,7 @@ function App() {
 
   useEffect(() => {
     if (selectedArea.length > 0) {
-      RandomEnemy(fetchURL, setEnemyPokemonData, selectedArea, getPokemonDatas)
+      randomEnemy(fetchURL, setEnemyPokemonData, selectedArea, getPokemonDatas)
       setPageNum(2)
       setSelectedArea('')
     }
@@ -79,11 +107,9 @@ function App() {
       <div className='location-page'>
         <Location
           locationData={locationData}
-          selectedLocation={selectedLocation}
-          setSelectedLocation={setSelectedLocation}
+          onLocationSelected={onLocationSelected}
           areaData={areaData}
-          setSelectedArea={setSelectedArea}
-          locationsURL={locationsURL}
+          onAreaSelected={onAreaSelected}
         />
       </div>
     )
@@ -93,7 +119,7 @@ function App() {
           <Choose
           ourPokemons={ourPokemons}
           enemyPokemonData={enemyPokemonData}
-          setSelectedPokemon={setSelectedPokemon}
+          onPokemonSelected={onPokemonSelected}
           />
       </div>
     )
@@ -102,11 +128,10 @@ function App() {
       <div className='battle-page'>
         <Battle
           selectedPokemon={selectedPokemon}
-          setSelectedPokemon={setSelectedPokemon}
           enemyPokemonData={enemyPokemonData}
           ourPokemons={ourPokemons}
-          setOurPokemons={setOurPokemons}
-          setPageNum={setPageNum}
+          handleBattleEnding={handleBattleEnding}
+          handleGoingBackToTheLocations={handleGoingBackToTheLocations}
         />
       </div>
     )

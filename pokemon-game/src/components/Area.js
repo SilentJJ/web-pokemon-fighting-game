@@ -1,10 +1,10 @@
-function Area({ selectedLocation, areaData, setSelectedArea }) {
+function Area({ areaData, onAreaSelected }) {
 
   if (areaData[0]?.areas.length > 0) {
     return (
       <div className="areasDiv">
         {areaData[0]?.areas.map((area) => 
-          <button className="areaButton" key={area?.url} id={area?.url} onClick={(e) => setSelectedArea(area?.url)}>
+          <button className="areaButton" key={area?.url} id={area?.url} onClick={() => onAreaSelected(area?.url)}>
             {(area?.name).replace(/-/g, ' ')}
           </button>
         )}

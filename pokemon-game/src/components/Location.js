@@ -1,14 +1,10 @@
 import Area from './Area'
 
-function Location({ locationData, selectedLocation, setSelectedLocation, areaData, setSelectedArea, locationsURL }) {
-  
-  const handleLocationSelect = (event) => {
-    setSelectedLocation(locationsURL + (Number(event.target.value) + 1))
-  }
+function Location({ locationData, onLocationSelected, areaData, onAreaSelected }) {
 
   return (
     <div className='Location'>
-      <select onChange={handleLocationSelect}>
+      <select onChange={onLocationSelected}>
         {locationData.map((location, index) => 
           <option key={index} value={index}>
             {location.replace(/-/g, ' ')}
@@ -16,9 +12,8 @@ function Location({ locationData, selectedLocation, setSelectedLocation, areaDat
         )}
       </select>
       <Area 
-      selectedLocation={selectedLocation}
       areaData={areaData}
-      setSelectedArea={setSelectedArea}
+      onAreaSelected={onAreaSelected}
       />
     </div>
   );
